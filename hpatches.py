@@ -2,7 +2,7 @@ import urllib
 import urllib.request
 import zipfile
 from pathlib import Path
-from typing import Tuple
+from typing import Any, Dict, Tuple
 
 import numpy as np
 import torch
@@ -60,13 +60,13 @@ class HPatchesDataset(torch.utils.data.Dataset):
                 matrix.append([float(e) for e in elements])
         return np.array(matrix, dtype=np.float64)
 
-    def __getitem__(self, idx: int):
-        seq, q_idx = self.items[idx]
+    def __getitem__(self, idx: int) -> Dict[str, Any]:
+        seq, seq_idx = self.items[idx]
 
         data0, T0 = self._read_image(seq, 1)
-        data1, T1 = self._read_image(seq, q_idx)
+        data1, T1 = self._read_image(seq, seq_idx)
 
-        H = self.read_homography(self.root / seq / f"H_1_{q_idx}")
+        H = self.read_homography(self.root / seq / f"H_1_{seq_idx}")
         H = T0 @ H @ np.linalg.inv(T1)
 
         return {
@@ -74,6 +74,7 @@ class HPatchesDataset(torch.utils.data.Dataset):
             "scene": seq,
             "image0": data0,
             "image1": data1,
+            "seq_idx": seq_idx
         }
 
     def __len__(self):
