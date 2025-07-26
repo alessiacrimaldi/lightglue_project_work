@@ -33,3 +33,4 @@ The HPatches dataset is a widely adopted dataset for evaluating feature matching
 ### 📖 References
 
 - [LightGlue: Local Feature Matching at Light Speed](https://arxiv.org/abs/2306.16472), Philipp Lindenberger, Paul-Edouard Sarlin, Marc Pollefeys. ICCV 2023.
+- [HPatches Dataset: A Benchmark and Evaluation of Handcrafted and Learned Local Descriptors](https://github.com/hpatches/hpatches-dataset?tab=readme-ov-file), Vassileios Balntas, Karel Lenc, Andrea Vedaldi, Krystian Mikolajczyk. CVPR, 2017.
